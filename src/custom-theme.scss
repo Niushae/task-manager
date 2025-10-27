@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.toolbar-overrides((
+    container-background-color: rgb(24, 175, 163),
+    container-text-color: white,
+  ));
+}
+
+// Define a light M3 theme with the preset azure palette.
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+// Define a dark M3 theme with the preset cyan-orange palette.
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+// Apply the light theme by default to the 'html' root element.
+html {
+  @include mat.all-component-themes($light-theme);
+}
+
+// Apply the dark theme based on the user's preference.
+@media (prefers-color-scheme: dark) {
+  html {
+    @include mat.all-component-themes($dark-theme);
+  }
+}
